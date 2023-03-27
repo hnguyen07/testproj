@@ -75,12 +75,6 @@ Priority Process::getPriority() const
     return m_priority;
 }
 
-Priority Process::setPriority(const Priority prio)
-{
-    m_priority = prio;
-    return m_priority;
-}
-
 ProcessID Process::getWait() const
 {
     return m_waitId;
