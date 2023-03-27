@@ -117,7 +117,7 @@ class Process
 
     Priority getPriority() const;
 
-    Priority setPriority(const Priority &prio);
+    Priority setPriority(const Priority prio);
 
     ProcessID getWait() const;
 
