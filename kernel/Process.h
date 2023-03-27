@@ -266,7 +266,7 @@ class Process
     /** Current process status. */
     State m_state;
 
-    /** Current priority queue. */
+    /** Current priority */
     Priority m_priority;
 
     /** Waits for exit of this Process. */

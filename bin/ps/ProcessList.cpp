@@ -26,6 +26,8 @@ ProcessList::ProcessList(int argc, char **argv)
     : POSIXApplication(argc, argv)
 {
     parser().setDescription("Output system process list");
+    // Display the priority of processes when there is a '-l' flag set 
+    parser.registerFlag('l', "priority", "Display priority levels of all processes");
 }
 
 ProcessList::Result ProcessList::exec()
@@ -34,8 +36,16 @@ ProcessList::Result ProcessList::exec()
     String out;
 
     // Print header
-    out << "ID  PRIORITY PARENT  USER GROUP STATUS     CMD\r\n";
-
+    // If the flag is set, display the priority. If not, display as normal
+    if (arguments().get("priority"))
+    {
+        out << "ID  PRIORITY PARENT  USER GROUP STATUS     CMD\r\n";
+    }
+    else
+    {
+        out << "ID  PARENT  USER GROUP STATUS     CMD\r\n";
+    }
+    
     // Loop processes
     for (ProcessID pid = 0; pid < ProcessClient::MaximumProcesses; pid++)
     {
@@ -48,13 +58,22 @@ ProcessList::Result ProcessList::exec()
 
             // Output a line
             char line[128];
-            //info.kernelState.priority = 2;
-            snprintf(line, sizeof(line),
-                    "%3d %9d %7d %4d %5d %10s %32s\r\n",
+
+            if (arguments().get("priority"))
+            {
+                snprintf(line, sizeof(line),
+                    "%3d %8d %7d %4d %5d %10s %32s\r\n",
                      pid, info.kernelState.priority, info.kernelState.parent,
                      0, 0, *info.textState, *info.command);
+            }
+            else
+            {
+                snprintf(line, sizeof(line),
+                    "%3d %7d %4d %5d %10s %32s\r\n",
+                     pid, info.kernelState.parent,
+                     0, 0, *info.textState, *info.command);
+            }            
             out << line;
-
         }
     }
 

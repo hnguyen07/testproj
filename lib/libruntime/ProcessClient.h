@@ -90,14 +90,15 @@ class ProcessClient
      *
      * @return Process Priority Level
      */
-    Priority getProcessPriority() const;
+    Priority getPriority() const;
 
     /**
-     * Set process priority level
+     * Get process information by its ID.
      *
-     * @return Result code
+     * @param pid Process identifier of the process.
+     * @param newPriority New priotity for the process.
      */
-    Priority setProcessPriority(const Priority prio);
+    void setPriority(ProcessID pid, int newPriority);
 
     /**
      * Get process information by its ID.

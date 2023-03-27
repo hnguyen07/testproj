@@ -31,62 +31,37 @@
 Renice::Renice(int argc, char** argv)
     : POSIXApplication(argc, argv)
 {
-    parser().setDescription("Alter priority of running processes");
-    parser().registerFlag('n',"PRIOFLAG", "Change the priority of the designated process to the specified priority level if set");
+    parser().setDescription("Alter priority of running processes");    
     parser().registerPositional("PRIORITY", "Specified priority level");
     parser().registerPositional("PID", "Change the priority of the specified process");
+    parser().registerFlag('n',"prioflag", "Change the priority of the designated process to the specified priority level if set");
 }
 
 Renice::Result Renice::exec()
 {
     const ProcessClient process;    
     // New priority level to be applied to the specified process
-    int priority = 0;
+    int newPriority = atoi(arguments().get("PRIORITY"));
+    int pid = atoi(arguments().get("PID"));
 
     // Check if the -n flag is inputted
-    if (!(arguments().get("PRIOFLAG")))
+    if (!(arguments().get("prioflag")))
     {
         ERROR("missing flag for the priority change to be conducted");
         return InvalidArgument;
     }
 
     // Check if the priority level is inputted
-    if ((priority = atoi(arguments().get("PRIORITY"))) < 1
-            || (priority = atoi(arguments().get("PRIORITY"))) > 5)
+    if (newPriority < 1 || newPriority > 5)
     {
         ERROR("invalid priority level `" << arguments().get("PRIORITY") << "'");
         return InvalidArgument;
     }
     
-    // Loop processes
-    for (ProcessID pid = 0; pid < ProcessClient::MaximumProcesses; pid++)
+    if (pid > 0)
     {
-        ProcessClient::Info info;
-
-        ProcessClient::Result result = process.processInfo(pid, info);
-        if (result == ProcessClient::Success 
-            && atoi(arguments().get("PID")) == static_cast<int>(pid))
-        {
-            switch(static_cast<int>(priority))
-            {
-                case 1:
-                    info.kernelState.priority = 3;
-                    break;
-                case 2:
-                    info.kernelState.priority = 3;
-                    break;
-                case 3:
-                    info.kernelState.priority = 3;
-                    break;
-                case 4:
-                    info.kernelState.priority = 4;
-                    break;
-                case 5:
-                    info.kernelState.priority = 5;
-                    break;
-            }
-            break;
-        }
+        process.setPriority(pid, newPriority);
+        printf("Process %d's priority has been successfully changed.", pid);
     }
 
     return Success;

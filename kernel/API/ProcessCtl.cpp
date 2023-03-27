@@ -73,8 +73,11 @@ API::Result ProcessCtlHandler(const ProcessID procID,
     case GetPriority:
         return (API::Result) procs->current()->getPriority();
 
-    case SetPriority:
-        return (API::Result) procs->current()->setPriority(SetPriority);
+    // Set new priority for the process ID
+    case RenicePID:
+        proc->setPriority(addr);
+        procs->schedule();
+        break;
 
     case Schedule:
         procs->schedule();
@@ -198,7 +201,7 @@ Log & operator << (Log &log, ProcessOperation op)
         case GetPID:    log.append("GetPID"); break;
         case GetParent: log.append("GetParent"); break;
         case GetPriority: log.append("GetPriority"); break;
-        case SetPriority: log.append("SetPriority"); break;
+        case RenicePID: log.append("RenicePID"); break;
         case WatchIRQ:  log.append("WatchIRQ"); break;
         case EnableIRQ: log.append("EnableIRQ"); break;
         case DisableIRQ:log.append("DisableIRQ"); break;
