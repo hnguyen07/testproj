@@ -44,6 +44,7 @@ Renice::Result Renice::exec()
     // New priority level to be applied to the specified process
     int newPriority = atoi(arguments().get("PRIORITY"));
     int pid = atoi(arguments().get("PID"));
+    ProcessClient::Info info;
     const ProcessClient::Result result = process.processInfo(pid, info);
 
     // Check if the -n flag is inputted
