@@ -3,7 +3,7 @@
 #include "sys/types.h"
 #include <errno.h>
 
-pid_t renicepid(pid_t pid, int *stat_loc, int newPriority, int options)
+pid_t renicepid(pid_t pid, int newPriority, int *stat_loc, int options)
 {
     const ulong result = (ulong) ProcessCtl(pid, RenicePID, newPriority);
 
