@@ -77,7 +77,7 @@ Priority Process::getPriority() const
 
 Process::Result Process::setPriority(int newPriority)
 {
-    if (newPriority < 1 || newPriority > 1)
+    if (newPriority < 1 || newPriority > 5)
     {
         ERROR(newPriority << " is not a valid priority level.\n");
         return InvalidArgument;
