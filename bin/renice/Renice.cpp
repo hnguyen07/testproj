@@ -25,6 +25,7 @@
 #include <Process.h>
 #include <FreeNOS/Kernel.h>
 #include "ProcessManager.h"
+#include <sys/renice.h>
 #include "Renice.h"
 
 //renice -n 2 17
