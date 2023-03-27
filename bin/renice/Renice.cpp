@@ -39,7 +39,7 @@ Renice::Renice(int argc, char** argv)
 
 Renice::Result Renice::exec()
 {
-    const ProcessClient process;    
+    ProcessClient process;    
     // New priority level to be applied to the specified process
     int newPriority = atoi(arguments().get("PRIORITY"));
     int pid = atoi(arguments().get("PID"));
