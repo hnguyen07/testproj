@@ -5,7 +5,7 @@
 
 pid_t renicepid(pid_t pid, int *stat_loc, int newPriority, int options)
 {
-    const ulong result = (ulong) ProcessCtl(pid, RenicePID);
+    const ulong result = (ulong) ProcessCtl(pid, RenicePID, newPriority);
 
     switch ((const API::Result) (result & 0xffff))
     {

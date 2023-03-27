@@ -40,9 +40,13 @@ Renice::Renice(int argc, char** argv)
 Renice::Result Renice::exec()
 {
     ProcessClient process;    
+
     // New priority level to be applied to the specified process
     int newPriority = atoi(arguments().get("PRIORITY"));
     int pid = atoi(arguments().get("PID"));
+
+    ProcessClient::Info info;
+    ProcessClient::Result result = process.processInfo(pid, info);
 
     // Check if the -n flag is inputted
     if (!(arguments().get("prioflag")))
@@ -58,11 +62,14 @@ Renice::Result Renice::exec()
         return InvalidArgument;
     }
     
-    if (pid > 0)
+    if (result != ProcessClient::Success)
     {
-        process.setPriority(pid, newPriority);
-        printf("Process %d's priority has been successfully changed.\n", pid);
+        ERROR("invalid priority level `" << arguments().get("PRIORITY") << "'");
+        return InvalidArgument;
     }
+
+    renicepid(pid, newPriority, 0, 0);
+    printf("Process %d's priority has been successfully changed.\n", pid);
 
     return Success;
 }

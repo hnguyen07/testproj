@@ -41,7 +41,7 @@ Scheduler::Result Scheduler::enqueue(Process *proc, bool ignoreState)
         return InvalidArgument;
     }
     
-    switch(proc->getPriority()) 
+    switch((int)proc->getPriority()) 
     {
         case 1: 
             m_queue1.push(proc);
@@ -71,7 +71,7 @@ Scheduler::Result Scheduler::dequeue(Process *proc, bool ignoreState)
     }
 
     Size count;
-    switch(proc->getPriority()) 
+    switch((int)proc->getPriority()) 
     {
         case 1: 
             count = m_queue1.count();
@@ -174,7 +174,7 @@ Process * Scheduler::select()
 
         return p;
     } 
-    else
+    else if (m_queue1.count() > 0)
     {
         Process *p = m_queue1.pop();
         m_queue1.push(p);
