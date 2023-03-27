@@ -27,7 +27,7 @@ ProcessList::ProcessList(int argc, char **argv)
 {
     parser().setDescription("Output system process list");
     // Display the priority of processes when there is a '-l' flag set 
-    parser.registerFlag('l', "priority", "Display priority levels of all processes");
+    parser().registerFlag('l', "priority", "Display priority levels of all processes");
 }
 
 ProcessList::Result ProcessList::exec()
