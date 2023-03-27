@@ -61,7 +61,7 @@ Renice::Result Renice::exec()
     if (pid > 0)
     {
         process.setPriority(pid, newPriority);
-        printf("Process %d's priority has been successfully changed.", pid);
+        printf("Process %d's priority has been successfully changed.\n", pid);
     }
 
     return Success;

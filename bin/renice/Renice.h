@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __BIN_RENICE_PROCESSLIST_H
-#define __BIN_RENICE_PROCESSLIST_H
+#ifndef __BIN_RENICE_H
+#define __BIN_RENICE_H
 
 #include <POSIXApplication.h>
 
@@ -52,4 +52,4 @@ class Renice : public POSIXApplication
  * @}
  */
 
-#endif /* __BIN_RENICE_PROCESSLIST_H */
+#endif /* __BIN_RENICE_H */

@@ -40,10 +40,12 @@ typedef enum ProcessOperation
     KillPID,
     GetPID,
     GetParent,
+    // getting priority
     GetPriority,
+    // set new priority for the process ID
     RenicePID,
     WatchIRQ,
-    EnableIRQ,
+    EnableIRQ, 
     DisableIRQ,
     SendIRQ,
     InfoPID,
