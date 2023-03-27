@@ -70,7 +70,7 @@ class Process
         Waiting,
         Stopped
     };
-    
+
   public:
 
     /**
@@ -108,6 +108,13 @@ class Process
      * @return Priority of our process.
      */
     Priority getPriority() const;
+
+    /**
+     * Set the new priority for our process.
+     *
+     * @return Result code
+     */
+    Result setPriority(int newPriority);
 
     /**
      * Get Wait ID.

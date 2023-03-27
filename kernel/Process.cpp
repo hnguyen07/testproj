@@ -75,6 +75,18 @@ Priority Process::getPriority() const
     return m_priority;
 }
 
+Process::Result Process::setPriority(int newPriority)
+{
+    if (newPriority < 1 || newPriority > 1)
+    {
+        ERROR(newPriority << " is not a valid priority level.\n");
+        return InvalidArgument;
+    }
+
+    m_priority = (Priority) newPriority;
+    return Success;    
+}
+
 ProcessID Process::getWait() const
 {
     return m_waitId;
