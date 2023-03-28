@@ -24,11 +24,12 @@
  *
  * @param pid Process ID of child to change the priority.
  * @param stat_loc Points to an integer for storing the exit status.
+ * @param newPriority Priority Level to be set to for the process.
  * @param options Optional flags.
  *
  * @return Process ID of the child on success or -1 on error
  */
-extern C pid_t renicepid(pid_t pid, int newPriority, int *stat_loc, int options);
+extern pid_t renicepid(pid_t pid, int newPriority, int *stat_loc, int options);
 
 /**
  * @}
