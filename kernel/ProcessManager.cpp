@@ -209,7 +209,7 @@ ProcessManager::Result ProcessManager::changePriority(Process *proc, int newPrio
             FATAL("failed to dequeue PID " << proc->getID());
         }
 
-        if(proc->setPriority(newPriority) != Scheduler::Success)
+        if(proc->setPriority(newPriority) != Process::Success)
         {
             FATAL("failed to set new priority for PID " << proc->getID());
         }
