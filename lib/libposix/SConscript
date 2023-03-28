@@ -26,6 +26,8 @@ env.TargetLibrary('libposix', [ Glob('dirent/*.cpp'),
                                 Glob('sys/*.cpp'),
                                 Glob('sys/stat/*.cpp'),
                                 Glob('sys/utsname/*.cpp'),
+                                # Global path to renice in sys folder
+                                Glob('sys/renice/*.cpp'),
                                 Glob('sys/wait/*.cpp'),
                                 Glob('sys/time/*.cpp'),
                                 Glob('sys/socket/*.cpp'),
